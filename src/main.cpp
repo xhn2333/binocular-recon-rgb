@@ -10,9 +10,11 @@ int main(int argc, char* argv[]) {
     string path = "../config/test.json";
     Config config(path);
     config.show_config();
-    DataLoader dataloader("../data/Pipes-perfect/");
-
+    Data* data = new Data();
+    DataLoader dataloader("../data/Pipes-perfect/", *data);
     cv::Mat gt =
         cv::imread("../data/Pipes-perfect/disp0.pfm", cv::IMREAD_UNCHANGED);
+
+    cv::imwrite("./depth.png", *(data->depth));
     return 0;
 }

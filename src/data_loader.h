@@ -3,12 +3,11 @@
 
 using namespace std;
 
-class DataLoader {
+class Data {
    public:
-    DataLoader(std::string path);
-
-    cv::Mat imgL, imgR;
-    cv::Mat insL, insR;
+    cv::Mat *imgL, *imgR;
+    cv::Mat *insL, *insR;
+    cv::Mat *depth;
     double doffs;
     double baseline;
     int width;
@@ -19,8 +18,20 @@ class DataLoader {
     double vmax;
     double dyavg;
     double dymax;
+    
+
+    Data();
+    ~Data();
 
    private:
-    void load_para(string path);
+};
 
+class DataLoader {
+   public:
+    DataLoader(std::string path, Data& args);
+
+   private:
+    void load_img(string path, Data& args);
+    void load_para(string path, Data& args);
+    void load_gt(string path, Data& args);
 };
